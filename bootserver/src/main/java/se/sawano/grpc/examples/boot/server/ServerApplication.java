@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-package se.sawano.grpc;
+package se.sawano.grpc.examples.boot.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class ExamplesApplication {
+public class ServerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ExamplesApplication.class, args);
-	}
+    public static void main(String[] args) throws Exception {
+        final ConfigurableApplicationContext context = SpringApplication.run(ServerApplication.class, args);
+        context.getBean(GRpcServer.class).blockUntilShutdown();
+    }
+
 }
