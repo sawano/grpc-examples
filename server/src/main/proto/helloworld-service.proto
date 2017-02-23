@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package examples;
+
+option java_package = "se.sawano.grpc.examples.helloworld";
+option java_multiple_files = true;
+//option java_outer_classname = "SomeName";
+
+service HelloService {
+    rpc SayHello (Guest) returns (Answer);
+}
+
+message Result {
+    oneof either {
+        Answer answer = 1;
+        bool failure = 2;
+    }
+}
+
+message Answer {
+    string message = 1;
+}
+
+message Guest {
+    string name = 1;
+}
