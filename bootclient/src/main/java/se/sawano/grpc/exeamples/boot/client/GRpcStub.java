@@ -58,9 +58,6 @@ public class GRpcStub {
         }
     }
 
-    /**
-     * Created by dansaw on 2017-02-23.
-     */
     public interface ClientConfiguration {
 
         @NotNull
