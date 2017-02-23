@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package se.sawano.grpc.examples.client;
+package se.sawano.grpc.exeamples.boot.client;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.sawano.grpc.examples.helloworld.Answer;
 import se.sawano.grpc.examples.helloworld.Guest;
 
+import javax.annotation.PostConstruct;
 import java.io.UncheckedIOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -31,14 +32,14 @@ import static org.apache.commons.lang3.Validate.notNull;
 
 public class HelloClient {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HelloClient.class);
-
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private final GRpcStub stub;
 
     public HelloClient(final GRpcStub stub) {
         this.stub = notNull(stub);
     }
 
+    @PostConstruct
     public void startTalking() {
         Executors.newSingleThreadScheduledExecutor()
                  .scheduleAtFixedRate(this::sayHello, 2, 5, TimeUnit.SECONDS);
@@ -46,14 +47,14 @@ public class HelloClient {
 
     private void sayHello() {
         try {
-            LOGGER.info("Saying hello to server...");
+            logger.info("Saying hello to server...");
 
             final Guest guest = Guest.newBuilder().setName(myName()).build();
             final Answer answer = stub.stub().sayHello(guest);
 
-            LOGGER.info("Server says: {}", answer.getMessage());
+            logger.info("Server says: {}", answer.getMessage());
         } catch (Exception e) {
-            LOGGER.error("Error while talking to server", e);
+            logger.error("Error while talking to server", e);
         }
     }
 

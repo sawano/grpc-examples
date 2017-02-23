@@ -14,34 +14,17 @@
  * limitations under the License.
  */
 
-package se.sawano.grpc.examples.client;
+package se.sawano.grpc.exeamples.boot.client;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
 public class ClientApplication {
 
-    private GRpcStub stub;
-
     public static void main(String[] args) throws Exception {
-        final ClientApplication client = new ClientApplication();
-        client.init();
+        SpringApplication.run(ClientApplication.class, args);
         Thread.currentThread().join();
     }
-
-
-    public void init() {
-        final String serverIp = "127.0.0.1";
-        final int serverPort = 8082;
-
-        stub = new GRpcStub(serverIp, serverPort);
-        stub.init();
-
-        new HelloClient(stub).startTalking();
-
-        Runtime.getRuntime().addShutdownHook(new Thread(this::stop));
-    }
-
-    public void stop() {
-        stub.stop();
-    }
-
 
 }

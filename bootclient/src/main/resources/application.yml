@@ -1,0 +1,8 @@
+
+spring:
+  application:
+    name: grpc-client
+
+grpc:
+  server-ip: 127.0.0.1
+  server-port: 8082

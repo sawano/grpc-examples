@@ -30,6 +30,7 @@
         <module>server</module>
         <module>client</module>
         <module>bootserver</module>
+        <module>bootclient</module>
     </modules>
 
     <dependencyManagement>
