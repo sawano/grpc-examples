@@ -19,7 +19,7 @@ package se.sawano.grpc.examples.server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static java.util.Collections.singletonList;
+import static java.util.Arrays.asList;
 
 
 public class ServerApplication {
@@ -38,7 +38,7 @@ public class ServerApplication {
     public void init() {
         logger.info("Starting gRPC server...");
 
-        gRpcServer = new GRpcServer(8082, singletonList(new HelloService()));
+        gRpcServer = new GRpcServer(8082, asList(new HelloService(), new GoodbyeService()));
         gRpcServer.init();
 
         logger.info("Started gRPC server");

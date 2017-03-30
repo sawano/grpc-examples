@@ -49,9 +49,15 @@ public class HelloClient {
             LOGGER.info("Saying hello to server...");
 
             final Guest guest = Guest.newBuilder().setName(myName()).build();
-            final Answer answer = stub.stub().sayHello(guest);
+            final Answer answer = stub.helloStub().sayHello(guest);
 
             LOGGER.info("Server says: {}", answer.getMessage());
+
+            LOGGER.info("Saying goodbye to server...");
+
+            final Answer goodbyeAnswer = stub.goodbyeStub().sayGoodbye(guest);
+
+            LOGGER.info("Server says: {}", goodbyeAnswer.getMessage());
         } catch (Exception e) {
             LOGGER.error("Error while talking to server", e);
         }

@@ -10,6 +10,10 @@ service HelloService {
     rpc SayHello (Guest) returns (Answer);
 }
 
+service GoodbyeService {
+    rpc SayGoodbye (Guest) returns (Answer);
+}
+
 message Result {
     oneof either {
         Answer answer = 1;
