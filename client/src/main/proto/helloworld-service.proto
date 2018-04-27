@@ -17,7 +17,7 @@ service GoodbyeService {
 message Result {
     oneof either {
         Answer answer = 1;
-        bool failure = 2;
+        Failure failure = 2;
     }
 }
 
@@ -27,4 +27,11 @@ message Answer {
 
 message Guest {
     string name = 1;
+}
+
+enum Failure {
+    reserved 1;
+
+    NOT_USED = 0;
+    TWO_ENUM = 2;
 }
