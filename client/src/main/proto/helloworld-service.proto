@@ -14,6 +14,10 @@ service GoodbyeService {
     rpc SayGoodbye (Guest) returns (Answer);
 }
 
+service ResultService {
+    rpc doProcess (Guest) returns (Result);
+}
+
 message Result {
     oneof either {
         Answer answer = 1;
@@ -32,6 +36,6 @@ message Guest {
 enum Failure {
     reserved 1;
 
-    NOT_USED = 0;
+    NULL = 0;
     TWO_ENUM = 2;
 }

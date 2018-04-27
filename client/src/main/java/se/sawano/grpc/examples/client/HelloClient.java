@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import se.sawano.grpc.examples.helloworld.Answer;
 import se.sawano.grpc.examples.helloworld.Guest;
+import se.sawano.grpc.examples.helloworld.Result;
 
 import java.io.UncheckedIOException;
 import java.net.InetAddress;
@@ -58,6 +59,13 @@ public class HelloClient {
             final Answer goodbyeAnswer = stub.goodbyeStub().sayGoodbye(guest);
 
             LOGGER.info("Server says: {}", goodbyeAnswer.getMessage());
+
+            LOGGER.info("Asking server to process...");
+
+            final Result result = stub.resultStub().doProcess(guest);
+
+            LOGGER.info("Result failure was {}", result.getFailure());
+
         } catch (Exception e) {
             LOGGER.error("Error while talking to server", e);
         }

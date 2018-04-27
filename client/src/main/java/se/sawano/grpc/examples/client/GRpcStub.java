@@ -20,6 +20,7 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import se.sawano.grpc.examples.helloworld.GoodbyeServiceGrpc;
 import se.sawano.grpc.examples.helloworld.HelloServiceGrpc;
+import se.sawano.grpc.examples.helloworld.ResultServiceGrpc;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,12 +34,12 @@ public class GRpcStub {
     private ManagedChannel channel;
     private HelloServiceGrpc.HelloServiceBlockingStub helloServiceBlockingStub;
     private GoodbyeServiceGrpc.GoodbyeServiceBlockingStub goodbyeServiceBlockingStub;
+    private ResultServiceGrpc.ResultServiceBlockingStub resultServiceBlockingStub;
 
     public GRpcStub(final String serverIp, final Integer serverPort) {
         this.serverIp = notEmpty(serverIp);
         this.serverPort = notNull(serverPort);
     }
-
 
     public void init() {
         channel = ManagedChannelBuilder.forAddress(serverIp, serverPort)
@@ -46,6 +47,7 @@ public class GRpcStub {
                                        .build();
         helloServiceBlockingStub = HelloServiceGrpc.newBlockingStub(channel);
         goodbyeServiceBlockingStub = GoodbyeServiceGrpc.newBlockingStub(channel);
+        resultServiceBlockingStub = ResultServiceGrpc.newBlockingStub(channel);
     }
 
     public HelloServiceGrpc.HelloServiceBlockingStub helloStub() {
@@ -56,6 +58,9 @@ public class GRpcStub {
         return goodbyeServiceBlockingStub;
     }
 
+    public ResultServiceGrpc.ResultServiceBlockingStub resultStub() {
+        return resultServiceBlockingStub;
+    }
 
     public void stop() {
         try {

@@ -21,12 +21,10 @@ import org.slf4j.LoggerFactory;
 
 import static java.util.Arrays.asList;
 
-
 public class ServerApplication {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private GRpcServer gRpcServer;
-
 
     public static void main(String[] args) throws Exception {
         final ServerApplication server = new ServerApplication();
@@ -34,11 +32,10 @@ public class ServerApplication {
         server.blockUntilShutdown();
     }
 
-
     public void init() {
         logger.info("Starting gRPC server...");
 
-        gRpcServer = new GRpcServer(8082, asList(new HelloService(), new GoodbyeService()));
+        gRpcServer = new GRpcServer(8082, asList(new HelloService(), new GoodbyeService(), new ResultService()));
         gRpcServer.init();
 
         logger.info("Started gRPC server");
